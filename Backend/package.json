@@ -6,7 +6,13 @@
   "scripts": {
     "test": "jest --detectOpenHandles --testEnvironment=node --runInBand ./tests",
     "start": "node server",
-    "lint": "eslint"
+    "lint": "eslint",
+    "hooks:pre-commit": "node ./hooks/pre-commit.js",
+    "hooks:pre-push": "node ./hooks/pre-push.js"
+  },
+  "husky": {
+    "pre-commit": "npm run hooks:pre-commit",
+    "pre-push": "npm run hooks:pre-push"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +30,7 @@
   "devDependencies": {
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
+    "husky": "^6.0.0",
     "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3"
