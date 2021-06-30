@@ -1,24 +1,60 @@
-const request = require('supertest')
-const server = require('../server')
-const User = require('../models/Users')
-const DB = require('../config/db')
-console.log(DB.connect())
+const db= require('../config/db');
+const app = require('../server')
+const request = require('supertest');
+const User = require('../models/Users');
 
 
-beforeAll(async () => await DB.connect())
-afterAll(async () => await DB.clearDatabase())
-afterAll(async () => await DB.closeDatabase())
-
-
-it("Should signup new user correctly", async () => {
-    const res = await request(server)
-        .post('/Api/signUp')
-        .send({
-            name: "kritika",
-            email: "kritika@gmail.com",
-            password: "12345678",
-            isAdmin: false
-        })
-    expect(res.statusCode).toBe(200)
-    console.log(err.statusCode)
+beforeAll(async () =>{
+    
+    console.log(db.connect())
+    
+    
 })
+// afterAll(async () => await db.clearDatabase())
+afterAll(async () => await db.closeDatabase())
+
+
+
+// signUp a user
+it('it should create a new user',async()=>{
+    
+    const res = await request(app)
+    .post('/Api/user/signUp').send({
+        name:'rohit',
+        email:"rohitk1234@navgurukul.org",
+        password:"123456789"
+    })
+    
+
+    expect(res.statusCode).toBe(200)
+    
+})
+
+
+// login a user
+
+it('it should login a user',async()=>{
+    const res = await request(app)
+    .post('/Api/user/login')
+    .send({ email:"rohitk705@gmail.com",
+            password:"123455678"
+        })
+    .expect(400)
+})
+
+
+// update/reset passwords
+
+it("Should update password.", async () => {
+	const res = await request(app)
+		.put(`/Api/users/login/forgotpassword`)
+		.send({
+            email:"rohit@navgurukul.org",
+			password: "password",
+			newPassword: "pass1234",
+			confirmPassword: "pass1234",
+		})
+		.expect(res.statusCode).toBe(200)
+
+});
+
