@@ -15,7 +15,7 @@ app.get('/',(req,res)=>{
 })
 
 // routes
-app.use('/Api/user',require('./routes/signup'))
+app.use('/Api/user',require('./routes/users'))
 
 app.use((req,res,next)=>{
     const error=new Error('Not found')

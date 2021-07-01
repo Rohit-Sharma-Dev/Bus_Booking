@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
-const { check, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const User = require("../models/Users");
@@ -13,32 +12,21 @@ module.exports.signup=async(req,res)=>{
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { name, email, password,isAdmin } = req.body;
-
+        const { name, email, password,isAdmin} = req.body;
         try {
             let user = await User.findOne({ email });
-
             if (user) {
                 return res
                     .status(400)
                     .json({ errors: [{ msg: "User Already Exists" }] });
             }
-
-            const avatar = gravatar.url(email, {
-                s: "200",
-                r: "pg",
-                d: "mm",
-            });
-
             user = new User({
                 name,
                 email,
                 password,
                 isAdmin
             });
-
             const salt = await bcrypt.genSalt(10);
-
             user.password = await bcrypt.hash(password, salt);
 
             await user.save();
@@ -113,4 +101,40 @@ module.exports.login =async(req, res)=>{
             res.status(500).send("server error");
         }
     
+}
+
+
+
+module.exports.forgotpassword=async(req, res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const {email,password,newPassword,confirmPassword}=req.body
+    try {
+        let user= await User.findOne({ email})
+        if (!user){
+            return res
+                .status(400)
+                .json({ errors: [{ msg: "Invalid Credentials" }] });
+            
+        }
+        const isMatch=await bcrypt.compare(password, user.password);
+        if (!isMatch){
+            return res.send("password isn't matched")
+        }
+        if(newPassword===confirmPassword){
+
+            const salt = await bcrypt.genSalt(10);
+
+            user.newPassword = await bcrypt.hash(newPassword, salt);
+            user= new User({
+                email , newpassword
+            })
+            await user.save();
+        }
+    } catch (err) {
+        res.status(500).send("server error");
+    }
+
 }

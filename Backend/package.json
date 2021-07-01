@@ -8,7 +8,8 @@
     "start": "nodemon server.js",
     "lint": "eslint",
     "hooks:pre-commit": "node ./hooks/pre-commit.js",
-    "hooks:pre-push": "node ./hooks/pre-push.js"
+    "hooks:pre-push": "node ./hooks/pre-push.js",
+    "prepare": "husky install"
   },
   "jest": {
     "testEnvironment": "node",
@@ -17,7 +18,7 @@
     ]
   },
   "husky": {
-    "pre-commit": "npm run hooks:pre-commit",
+    "pre-commit": "npm test",
     "pre-push": "npm run hooks:pre-push"
   },
   "keywords": [],
@@ -38,7 +39,7 @@
   "devDependencies": {
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.0",
     "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "rimraf": "^3.0.2",

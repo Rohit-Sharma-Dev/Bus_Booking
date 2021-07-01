@@ -20,9 +20,10 @@ const userschema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default:false
+    },
+    isAdmin: { type: Boolean, default: false }
     }
-     
-})
+);
 
 const User = mongoose.model('Users', userschema)
 module.exports = User
