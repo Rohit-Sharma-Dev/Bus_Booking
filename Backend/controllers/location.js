@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const config = require("config");
-const location = require("../models/Location");
+// const {loginadmin}=require("../controllers/users")
+const locations= require("../models/Location");
 
 module.exports.addLocation=async(req, res)=>{
-    const location=new location(req.body)
+    const {city,state,stop}=req.body
+    const location=new location(data)
     await location.save();
-    res.json(location)
+    res.json(locations.location)
 }

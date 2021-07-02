@@ -11,7 +11,7 @@ module.exports.signup=async(req,res)=>{
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
+        // console.log(req)
         const { name, email, password,isAdmin} = req.body;
         try {
             let user = await User.findOne({ email });
@@ -64,29 +64,25 @@ module.exports.login =async(req, res)=>{
         const { email, password } = req.body;
 
         try {
-            let user = await User.findOne({ email});
+            let user =User.findOne({ email}) ;
 
             if (!user) {
                 return res
                     .status(400)
                     .json({ errors: [{ msg: "Invalid Credentials" }] });
             }
-
             const isMatch = await bcrypt.compare(password, user.password);
-
             if (!isMatch) {
                 return res
                     .status(400)
                     .json({ errors: [{ msg: "Invalid Credentials" }] 
                 });
             }
-
             const payload = {
                 user: {
                     id: user.id,
                 },
             };
-
             jwt.sign(
                 payload,
                 config.get("jwtsecret"),
@@ -103,38 +99,3 @@ module.exports.login =async(req, res)=>{
     
 }
 
-
-
-module.exports.forgotpassword=async(req, res)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    const {email,password,newPassword,confirmPassword}=req.body
-    try {
-        let user= await User.findOne({ email})
-        if (!user){
-            return res
-                .status(400)
-                .json({ errors: [{ msg: "Invalid Credentials" }] });
-            
-        }
-        const isMatch=await bcrypt.compare(password, user.password);
-        if (!isMatch){
-            return res.send("password isn't matched")
-        }
-        if(newPassword===confirmPassword){
-
-            const salt = await bcrypt.genSalt(10);
-
-            user.newPassword = await bcrypt.hash(newPassword, salt);
-            user= new User({
-                email , newpassword
-            })
-            await user.save();
-        }
-    } catch (err) {
-        res.status(500).send("server error");
-    }
-
-}

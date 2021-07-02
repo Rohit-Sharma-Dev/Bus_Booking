@@ -22,9 +22,7 @@ router.post("/signUp",
             "password",
             "please enter a password with 6 or more characters"
         ).isLength({ min: 6 })
-    ],userInfo.signup
-    
-);
+    ],auth,userInfo.signup);
 
 
 
@@ -36,9 +34,16 @@ router.post("/login",
     [
         check("email", "please include a valid email").isEmail(),
         check("password", "password is required").exists(),
-    ],userInfo.login)
+    ],auth,userInfo.login)
 
-router.put('/login/forgotpassword',auth,userInfo.forgotpassword)
+// router.put('/login/forgotpassword',auth,userInfo.forgotpassword)
+
+
+
+
+
+
+
 
 
 module.exports = router;

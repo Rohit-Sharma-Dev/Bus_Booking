@@ -16,6 +16,7 @@ app.get('/',(req,res)=>{
 
 // routes
 app.use('/Api/user',require('./routes/users'))
+app.use('/Api/admins',require('./routes/Admin'))
 
 app.use((req,res,next)=>{
     const error=new Error('Not found')
@@ -31,5 +32,5 @@ app.use((err,req,res,next)=>{
     })
 })
 
-// app.listen(PORT, () => console.log(`server started on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`server started on PORT ${PORT}`));
 module.exports=app
