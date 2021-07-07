@@ -36,7 +36,7 @@ module.exports.signup=async(req,res)=>{
                     id: user.id,
                 },
             };
-
+            console.log(payload)
             jwt.sign(
                 payload,
                 config.get("jwtsecret"),
@@ -61,7 +61,7 @@ module.exports.login =async(req, res)=>{
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { email, password } = req.body;
+        const { email, password} = req.body;
 
         try {
             let user =User.findOne({ email}) ;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --testEnvironment=node --runInBand ./tests",
+    "test": "jest --detectOpenHandles --watchAll  --coverage --testEnvironment=node --runInBand ./tests",
     "start": "nodemon server.js",
     "lint": "eslint",
     "hooks:pre-commit": "node ./hooks/pre-commit.js",

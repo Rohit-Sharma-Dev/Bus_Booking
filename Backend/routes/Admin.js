@@ -9,7 +9,7 @@ const auth=require("../middleware/users")
 
 const User = require("../models/Users");
 const adminInfo=require('../controllers/users')
-const location=require('../controllers/location')
+const locations=require('../controllers/location')
 
 
 //@route  POST api/admin/
@@ -37,14 +37,13 @@ router.post("/admin/login",
         check("email", "please include a valid email").isEmail(),
         check("password", "password is required")
     ]
-    ,auth,adminInfo.login)
+    ,adminInfo.login)
 
 //@route  POST api/admins/admin/addLocation
 //desc    Add locations
 //access  private
 
-router.post("/admin/addLocation",function(req,res){
-    location.location
-})
+router.post("/Admin/Addlocation",locations.addLocation)
+
 
 module.exports = router;

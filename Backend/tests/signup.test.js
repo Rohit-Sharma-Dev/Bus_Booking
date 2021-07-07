@@ -12,7 +12,6 @@ afterAll(async () => await db.close());
 
 it("it should create a new user++++++++=======",async()=>{
     let data={
-     
         "name": "rohit",
         "email":"rohit19@email.com",
         "password":"12345678",
@@ -20,7 +19,7 @@ it("it should create a new user++++++++=======",async()=>{
     }
     try {
         const res= await signup(data)
-        expect(res.statusCode).toBe(600)
+        expect(res.statusCode).toBe(200)
     } catch (err) {
         console.log(err)
     }
