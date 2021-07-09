@@ -36,7 +36,7 @@ router.post("/login",
         check("password", "password is required").exists(),
     ],userInfo.login)
 
-// router.put('/login/forgotpassword',auth,userInfo.forgotpassword)
+
 
 
 

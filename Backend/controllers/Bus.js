@@ -3,7 +3,7 @@ const User=require('../models/Users')
 const Staff=require('../models/Staff')
 const Location=require('../models/Location')
 const {validationResult}=require("express-validator");
-const seats=require('./seatCreate')
+// const seats=require('./seatCreate')
 
 const staffSearch = (phone) => {
     return new Promise((res, rej) => {
@@ -14,6 +14,18 @@ const staffSearch = (phone) => {
     });
   };
 
+
+const bus_size=["A","B","C","D"]
+const row=4
+let c=[]
+for (var i=0;i<row;i++){
+    let b=[]
+    for (var j=0;j<4;j++){
+        b.push((i+1)+""+bus_size[j]+" ")
+    }
+    c.push(b)
+}
+console.log(c)
 
 const createBus=async(req,res)=>{
     const errors=validationResult(req)
@@ -70,7 +82,7 @@ const createBus=async(req,res)=>{
         res.send("no such destination location found")
     }
 
-    Bus.seats = seats;
+    Bus.seats = bus_size;
     Bus.busStaff = staffs;
     Bus.from = fromlocation;
     Bus.to = tolocation;

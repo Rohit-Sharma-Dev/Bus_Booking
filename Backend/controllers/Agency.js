@@ -1,8 +1,7 @@
 const Agency=require('../models/Agency')
 
 const {validationResult}=require("express-validator");
-
-const createAgency=async(req,res)=>{
+module.exports.createAgency=async(req,res)=>{
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         res.status(400).json({errors:errors.array()})
@@ -10,21 +9,22 @@ const createAgency=async(req,res)=>{
     const {phone,agencyName,headOfficeLocation}=req.body
 
     try {
-        const Agency= await Agency.findOne({agencyName:agencyName})
+        const agency= await Agency.findOne({agencyName:agencyName})
         if (Agency){
-            return res.ststus(400).json({ errors:"agency already exist"})
+            return res.status(400).json({ errors:"agency already exist"})
         }
-        Agency=new agency({
+        agency=new Agency({
             agent: req.user,
             phone,
             agencyName,
             headOfficeLocation
         })
 
-        Agency.save()
+        await Agency.save()
 
-        res.json({msg:"agency has been added....."})
+        res.status(200).json({msg:"agency has been added....."})
     } catch (err) {
-        console.error(error.msg)
+        console.log(err)
+        res.status(400).json({msg:"not found"})
     }
 }
