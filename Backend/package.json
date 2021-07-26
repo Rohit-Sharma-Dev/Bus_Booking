@@ -10,7 +10,9 @@
     "lint": "eslint",
     "hooks:pre-commit": "node ./hooks/pre-commit.js",
     "hooks:pre-push": "node ./hooks/pre-push.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "frontend": "npm start --prefix ../frontend",
+    "bus": "concurrently \"npm run start\" \"npm run frontend\""
   },
   "jest": {
     "testEnvironment": "node",
@@ -28,6 +30,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.1",
+    "concurrently": "^6.2.0",
     "config": "^3.3.6",
     "express": "^4.17.1",
     "express-validator": "^6.10.1",

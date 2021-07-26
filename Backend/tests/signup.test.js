@@ -7,7 +7,7 @@ const {signup,login}=require("../controllers/users")
 
 
 beforeAll(async () => await db.connect());
-afterAll(async () => await db.clear());
+// afterAll(async () => await db.clear());
 afterAll(async () => await db.close());
 
 
@@ -26,10 +26,11 @@ describe("it should create a user",()=>{
     it('it should create a new user',async()=>{
     
         const res = await request(app)
-        .post('/Api/User/signUp').send({
+        .post('/api/user/signup').send({
             name:'rohit',
             email:"rohitk1234@nav.org",
-            password:"123456789"
+            password:"123456789",
+            isAdmin:true
         })
         expect(res.statusCode).toBe(200)   
     })

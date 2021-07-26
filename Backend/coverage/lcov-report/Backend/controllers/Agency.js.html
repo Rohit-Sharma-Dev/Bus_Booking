@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">14.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/16</span>
+                <span class='fraction'>3/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">14.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/16</span>
+                <span class='fraction'>3/21</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -86,22 +86,35 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,49 +122,57 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Agency=require('../models/Agency')
 &nbsp;
 const {validationResult}=require("express-validator");
-module.exports.createAgency=async(req,res)=&gt;{
-    const errors = validationResult(req)
-    <span class="missing-if-branch" title="if path not taken" >I</span>if(!errors.isEmpty()){
-<span class="cstat-no" title="statement not covered" >        res.status(400).json({errors:errors.array()})</span>
-    }
-    const {phone,agencyName,headOfficeLocation}=req.body
+module.exports.createAgency=<span class="fstat-no" title="function not covered" >as</span>ync(req,res)=&gt;{
 &nbsp;
-    try {
-        const agency= await Agency.findOne({agencyName:agencyName})
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (Agency){
-            return res.status(400).json({ errors:"agency already exist"})
+    const errors = <span class="cstat-no" title="statement not covered" >validationResult(req)</span>
+<span class="cstat-no" title="statement not covered" >    if(!errors.isEmpty()){</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({msg:"not found any body"})</span>
+    }
+    const {phone,agencyName,headOfficeLocation}=<span class="cstat-no" title="statement not covered" >req.body</span>
+<span class="cstat-no" title="statement not covered" >    if (!phone || !agencyName || !headOfficeLocation){</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(401).json({msg:"give the correct input"})</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >        console.log("sjikji")</span>
+        let agency= <span class="cstat-no" title="statement not covered" >await Agency.findOne({agencyName})</span>
+<span class="cstat-no" title="statement not covered" >        if (agency){</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).json({ errors:"agency already exist"})</span>
         }
+<span class="cstat-no" title="statement not covered" >        console.log("lllllll")</span>
 <span class="cstat-no" title="statement not covered" >        agency=new Agency({</span>
-            agent: req.user,
+            agent: req.user.id,
             phone,
             agencyName,
             headOfficeLocation
         })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        await Agency.save()</span>
-&nbsp;
+<span class="cstat-no" title="statement not covered" >        await agency.save()</span>
+<span class="cstat-no" title="statement not covered" >        console.log("dskjdkj")</span>
 <span class="cstat-no" title="statement not covered" >        res.status(200).json({msg:"agency has been added....."})</span>
     } catch (err) {
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
-<span class="cstat-no" title="statement not covered" >        res.status(400).json({msg:"not found"})</span>
+<span class="cstat-no" title="statement not covered" >        console.log("agency")</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({msg:"helloooo ji"})</span>
     }
-}</pre></td></tr></table></pre>
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 09 2021 21:20:40 GMT+0530 (India Standard Time)
+                at Fri Jul 23 2021 13:25:21 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

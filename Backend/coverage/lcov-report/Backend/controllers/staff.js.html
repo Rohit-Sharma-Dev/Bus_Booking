@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.89% </span>
+                <span class="strong">15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/18</span>
+                <span class='fraction'>3/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.89% </span>
+                <span class="strong">15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/18</span>
+                <span class='fraction'>3/20</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,34 +92,38 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,31 +134,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Staff=require('../models/Staff')
 const {validationResult}=require('express-validator')
 &nbsp;
-module.exports.addStaff =async(req,res)=&gt;{
-    const errors = validationResult(req)
-    <span class="missing-if-branch" title="if path not taken" >I</span>if(!errors.isEmpty()){
+module.exports.addStaff =<span class="fstat-no" title="function not covered" >as</span>ync(req,res)=&gt;{
+    const errors = <span class="cstat-no" title="statement not covered" >validationResult(req)</span>
+<span class="cstat-no" title="statement not covered" >    if(!errors.isEmpty()){</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ errors: errors.array() })</span>
     }
-    const {name,phone,address,isDriver}= req.body
-    const staffData = { phone, name, address, isDriver };
-    staffData.adminId = req.user.id;
-    try {
+    const {name,phone,address,isDriver}= <span class="cstat-no" title="statement not covered" >req.body</span>
+    const staffData = <span class="cstat-no" title="statement not covered" >{ phone, name, address, isDriver };</span>
+<span class="cstat-no" title="statement not covered" >    staffData.adminId = req.user.id;</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
         
-&nbsp;
-        let staff=await Staff.findOne({phone})
-        if (staff){
-            return res.status(400).json({msg:"already exist"})
+<span class="cstat-no" title="statement not covered" >        console.log("sajisi")</span>
+        let staff=<span class="cstat-no" title="statement not covered" >await Staff.findOne({phone})</span>
+<span class="cstat-no" title="statement not covered" >        if (staff){</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).json({msg:"already exist"})</span>
         }
-        console.log(staff, ":TEST")
-        staff=new Staff({
-            adminId:req.user,
+<span class="cstat-no" title="statement not covered" >        console.log(staff, ":TEST")</span>
+<span class="cstat-no" title="statement not covered" >        staff=new Staff({</span>
+            adminId:req.user.id,
             name,
             phone,
             address,
             isDriver
         })
-       await staff.save();
-        res.status(200).json({msg:"staff added successfully"})
+       
+<span class="cstat-no" title="statement not covered" >       await staff.save();</span>
+<span class="cstat-no" title="statement not covered" >       console.log(staff)</span>
+<span class="cstat-no" title="statement not covered" >        res.status(200).json({msg:"staff added successfully"})</span>
 &nbsp;
         
     } catch (err) {
@@ -169,7 +175,7 @@ module.exports.addStaff =async(req,res)=&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 09 2021 21:20:40 GMT+0530 (India Standard Time)
+                at Fri Jul 23 2021 13:25:21 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

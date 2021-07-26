@@ -11,20 +11,22 @@ module.exports.addStaff =async(req,res)=>{
     staffData.adminId = req.user.id;
     try {
         
-
+        console.log("sajisi")
         let staff=await Staff.findOne({phone})
         if (staff){
             return res.status(400).json({msg:"already exist"})
         }
         console.log(staff, ":TEST")
         staff=new Staff({
-            adminId:req.user,
+            adminId:req.user.id,
             name,
             phone,
             address,
             isDriver
         })
+       
        await staff.save();
+       console.log(staff)
         res.status(200).json({msg:"staff added successfully"})
 
         

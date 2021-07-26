@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const locationSchema= new mongoose.Schema({
 city:{
-    type:String
+    type:String,
+    required:true
 },
-state:{ type:String}
+state:{ 
+    type:String,
+    required:true
+    }
 })
 
 const location= mongoose.model('locations',locationSchema)

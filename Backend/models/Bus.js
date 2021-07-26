@@ -30,7 +30,7 @@ seatCategory:{
 },
 driver:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'staffs'
+    ref:'staff'
     },
 helper:{
     type:mongoose.Schema.Types.ObjectId,
@@ -43,12 +43,12 @@ policy: {
 images:{ data: Buffer, contentType: String },
 from:{ // index
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Location',
+        ref:'locations',
         index:true,
 },
 to:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Location',
+        ref:'locations',
         index : true
    },
 arrivalTime: {

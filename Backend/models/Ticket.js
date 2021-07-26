@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const ticketSchema = new mongoose.Schema({
+	seat_no :[ {
+		type:String,
+		required:true
+	}],
 	passengers:[{
-		seat_no : {
-			type:String,
-			required:true
-		},
 		name: {
 			type:String,
 			required:true
@@ -18,6 +18,14 @@ const ticketSchema = new mongoose.Schema({
 			required:true
 		},
 	}],
+	contactNo:{
+		type:Number,
+		required: true
+	},
+	journeyDate:{
+		type:Date,
+		required:true
+	},
    userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',

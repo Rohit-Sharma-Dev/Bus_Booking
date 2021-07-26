@@ -1,95 +1,139 @@
-const Bus=require('../models/Bus')
-const User=require('../models/Users')
-const Staff=require('../models/Staff')
-const Location=require('../models/Location')
-const {validationResult}=require("express-validator");
-// const seats=require('./seatCreate')
+const Bus = require('../models/Bus');
+const User = require('../models/Users');
+const Staff = require('../models/Staff');
+const location = require('../models/Location');
+const Agency=require('../models/Agency')
+const { validationResult } = require('express-validator');
 
 const staffSearch = (phone) => {
-    return new Promise((res, rej) => {
-      let staff = Staff.findOne({ phone });
-      if (staff) {
-        res(staff);
-      }
-    });
+  return new Promise((res, rej) => {
+    let staff = Staff.findOne({ phone });
+    if (staff) {
+      res(staff);
+    }
+  });
+};
+
+
+const generateseat=(seats)=>{
+  let bus_size = [];
+  let code = ["A", "B", "C", "D"];
+  for (let i = 1; i <=seats; i++) {
+    let b = [];
+    for (let j = 1; j <= 4; j++) {
+      b.push(i + code[j-1]);
+    }
+    bus_size.push(b);
+  }
+  return bus_size;
+}
+
+
+module.exports.createBus = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ msg:"checking...."});
+  }
+  const {
+    busName,
+    vehicleNo,
+    seats,
+    busType,
+    seatCategory,
+    policy,
+    images,
+    from,
+    to,
+    fare,
+    arrivalTime,
+    departureTime
+  } = req.body;
+  let {driver, helper}=req.body;
+
+  let busDetails = {
+    busName,
+    vehicleNo,
+    policy,
+    images,
+    fare,
+    arrivalTime,
+    departureTime,
   };
 
+  if (seatCategory) busDetails.seatCategory = seatCategory;
+  if (busType) busDetails.busType = busType;
 
-const bus_size=["A","B","C","D"]
-const row=4
-let c=[]
-for (var i=0;i<row;i++){
-    let b=[]
-    for (var j=0;j<4;j++){
-        b.push((i+1)+""+bus_size[j]+" ")
-    }
-    c.push(b)
-}
-console.log(c)
+  try {
+    let agencyProfile = await Agency.findOne({ agent: req.user.id });
+    if(agencyProfile){
+      let bus=await Bus.findOne({vehicleNo})
+      console.log(bus)
+      busDetails.agency=agencyProfile._id
+      busDetails.seats=generateseat(seats)
+      console.log(generateseat(seats))
 
-const createBus=async(req,res)=>{
-    const errors=validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array() })
-    }
-    const {
-        busName,
-        vehicleNo,
-        seats,
-        busType,
-        seatCategory,
-        policy,
-        images,
-        from,
-        to,
-        arrivalTime,
-        departureTime,
-      } = req.body;
+      let fromLocation=await location.findOne({"city":from})
+      let toLocation=await location.findOne({"city":to})
+      if (!toLocation || !fromLocation) {
+        return res.status(404).json({ msg: "No such location found" });
+      }
+
+      busDetails.driver = driver;
+      busDetails.helper = helper;
+      busDetails.from = fromLocation._id;
+      busDetails.to = toLocation._id;
+      console.log("jklmno")
+      
+      if (bus) {
+        bus = await Bus.findOneAndUpdate(
+          { vehicleNo },
+          { $set: busDetails },
+          { new: true }
+        );
+        return res.status(200).json(bus);
+      }
+
+      // if (id) busDetails._id = id;
+
+      bus = new Bus(busDetails);
+
+      console.log("done successfully");
+      await bus.save();
+      res.status(200).json(Bus);
+
+    } else {
+      return res.status(400).json({ msg: "No agency found of current admin" });
+    }}
+    catch (err) {
+      console.log(err)
+      res.status(500).json({msg:"server error"})
+  }
+};
+
+
+module.exports.getBus=async(req, res)=>{
+  const errors = validationResult(req)
+  if(!errors.isEmpty()){
+    res.status(400).json({errors:errors.array()})
+  }
+  let {from ,to,date}=req.body
+   try {
+     from =await location.findOne({"city":from})
+     to=await location.findOne({"city":to})
     
-    let { driver, helper } = req.body;
-    let busDetails = {
-        busName,
-        vehicleNo,
-        policy,
-        images,
-        arrivalTime,
-        departureTime,
-      };
-
-    
-    const Bus=await Bus.findOne({vehicleNo})
-    if(Boolean(Bus)){
-        res.json({msg:"no you can't add this bus....."})
+     if (!from || !to) {
+      return res.status(400).json({msg:"location not found"});
     }
 
-    const Driver =await staffSearch(driver)
-    if(!driver.isDriver){
-        res.json({msg:"driver not found....."})
+    let buses = await Bus.find({
+      $and: [{ to:to }, { from: from }],
+    }).populate("from",["city","state"]).populate("to",["city","state"])
+    if (!buses) {
+      return res.status(400).json([]);
     }
-
-    const Helper=await staffSearch(helper)
-    if(helper.isDriver){
-        res.json({msg:"helper not found...."})
-    }
-
-    const fromLocation=await location.findOne({from})
-    if (!fromLocation){
-        res.send("no this location doesn't exist")
-    }
-
-    const toLocation=await location.findOne({to})
-    if(!toLocation){
-        res.send("no such destination location found")
-    }
-
-    Bus.seats = bus_size;
-    Bus.busStaff = staffs;
-    Bus.from = fromlocation;
-    Bus.to = tolocation;
-
-    BUs.save()
-
-    return res.json({msg:"added bus successfully......"})
+    return res.status(200).json(buses);
+   } catch (err) {
+     console.log(err)
+     res.status(500).json({msg:"not found"})
+   }
 }
-
-module.exports=createBus

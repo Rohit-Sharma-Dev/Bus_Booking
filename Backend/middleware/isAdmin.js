@@ -1,15 +1,9 @@
-const User=require("../models/Users")
-
-module.exports=async(req, res, next)=>{
-    const {email}=req.body
-    const user=await User.findOne({ email })
-    // console.log(user)
-
-    if (user[0].isAdmin===true){
-        console.log("Admin logged Innnnnnnnn.........");
-        return next()
+module.exports = (req,res,next) => {
+    
+    const isAdmin = req.user.isAdmin;
+    if(!isAdmin){
+        const err = {status:401,msg:'No token,you are not an Admin'}
+        return next(err)
     }
-    else{
-        return res.json({msg:"you are not authorised admin...."})
-    }
+    next()
 }
