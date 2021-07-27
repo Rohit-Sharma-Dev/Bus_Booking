@@ -13,15 +13,15 @@ const ticketSchema = new mongoose.Schema({
 			type:String,
 			required:true
 			},
-		age: {
-			type:Number,
-			required:true
-		},
+		// age: {
+		// 	type:Number,
+		// 	required:true
+		// },
 	}],
-	contactNo:{
+	contactNo:[{
 		type:Number,
 		required: true
-	},
+	}],
 	journeyDate:{
 		type:Date,
 		required:true
