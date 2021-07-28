@@ -106,12 +106,6 @@ router.post('/addbus',[auth, [
     .isInt()
     .not()
     .isEmpty(),
-    check('driver', 'driver should be inserted')
-    .not()
-    .isEmpty(),
-    check('helper', 'helper should be inserted')
-    .not()
-    .isEmpty(),
     check('policy', 'policy should be inserted')
     .not()
     .isEmpty(),

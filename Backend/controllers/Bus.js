@@ -48,7 +48,7 @@ module.exports.createBus = async (req, res) => {
     arrivalTime,
     departureTime
   } = req.body;
-  let {driver, helper}=req.body;
+  // let {driver, helper}=req.body;
 
   let busDetails = {
     busName,
@@ -79,8 +79,8 @@ module.exports.createBus = async (req, res) => {
         return res.status(404).json({ msg: "No such location found" });
       }
 
-      busDetails['driver']= driver;
-      busDetails['helper'] = helper;
+      // busDetails['driver']= driver;
+      // busDetails['helper'] = helper;
       busDetails.from = fromLocation._id;
       busDetails.to = toLocation._id;
       console.log("jklmno")
@@ -100,7 +100,7 @@ module.exports.createBus = async (req, res) => {
 
       console.log("done successfully");
       await bus.save();
-      res.status(200).json(Bus);
+      res.status(200).json(bus);
 
     } else {
       return res.status(400).json({ msg: "No agency found of current admin" });
