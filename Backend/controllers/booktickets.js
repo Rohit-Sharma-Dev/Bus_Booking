@@ -47,14 +47,13 @@ const bookTickets = async (req, res) => {
 
       
       
-      // console.log(createTicket,"lkklklllk")
+   
      
       createTicket.userId = req.user.id;
       createTicket.busId = bus._id;
-      // console.log(createTicket,"ffhfjjfj")
+  
       const generateTicket = new Tickets(createTicket);
-      // console.log(generateTicket,"fuck you")
-      // console.log(createTicket,"kkk")
+     
       await generateTicket.save();
 
       return res.status(200).json(generateTicket);
