@@ -31,7 +31,7 @@ const bookTickets = async (req, res) => {
       let seats=bus.seats;
       // console.log(seats,"seats")
       const allBookedSeat =await allBookedTickets(req.params.busId) 
-      // console.log(allBookedSeat,"allbooked")
+      console.log(allBookedSeat,"allbooked")
 
       // if(isOutOfRange(seat_no,seats)){
       //   return res.status(400).json({msg:"seats are not available"})

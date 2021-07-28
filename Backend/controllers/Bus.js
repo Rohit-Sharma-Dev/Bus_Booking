@@ -67,19 +67,20 @@ module.exports.createBus = async (req, res) => {
     let agencyProfile = await Agency.findOne({ agent: req.user.id });
     if(agencyProfile){
       let bus=await Bus.findOne({vehicleNo})
-      console.log(bus)
+        if(bus){
+          res.status(400).json({msg:"bus already exist"})
+        }
       busDetails.agency=agencyProfile._id
       busDetails.seats=generateseat(seats)
       console.log(generateseat(seats))
-
       let fromLocation=await location.findOne({"city":from})
       let toLocation=await location.findOne({"city":to})
       if (!toLocation || !fromLocation) {
         return res.status(404).json({ msg: "No such location found" });
       }
 
-      busDetails.driver = driver;
-      busDetails.helper = helper;
+      busDetails['driver']= driver;
+      busDetails['helper'] = helper;
       busDetails.from = fromLocation._id;
       busDetails.to = toLocation._id;
       console.log("jklmno")

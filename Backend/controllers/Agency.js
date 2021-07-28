@@ -28,7 +28,7 @@ module.exports.createAgency=async(req,res)=>{
 
         await agency.save()
         console.log("dskjdkj")
-        res.status(200).json({msg:"agency has been added....."})
+        res.status(200).json({msg:"agency has been added....."}).send(agency)
     } catch (err) {
         console.log("agency")
         return res.status(400).json({msg:"helloooo ji"})
