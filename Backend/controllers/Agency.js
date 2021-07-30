@@ -14,7 +14,7 @@ module.exports.createAgency=async(req,res)=>{
 
     try {
         console.log("sjikji")
-        let agency= await Agency.findOne({agencyName})
+        let agency= await Agency.findOne({phone})
         if (agency){
             return res.status(400).json({ errors:"agency already exist"})
         }

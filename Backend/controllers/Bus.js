@@ -1,4 +1,5 @@
 const Bus = require('../models/Bus');
+const Dummybus = require('../models/Dummybus');
 const User = require('../models/Users');
 const Staff = require('../models/Staff');
 const location = require('../models/Location');
@@ -157,7 +158,7 @@ module.exports.createBus = async (req, res) => {
 //     }
 //     busDetails.seats=generateseat(seats)
 
-//     let bus = new Bus(busDetails);
+//     let bus = new Dummybus(busDetails);
 
 //       console.log("done successfully");
 //       await bus.save();
