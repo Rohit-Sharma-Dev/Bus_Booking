@@ -32,6 +32,7 @@ const generateseat=(seats)=>{
 module.exports.createBus = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log(errors)
     return res.status(400).json({ msg:"checking...."});
   }
   const {
@@ -48,7 +49,7 @@ module.exports.createBus = async (req, res) => {
     arrivalTime,
     departureTime
   } = req.body;
-  // let {driver, helper}=req.body;
+  let {driver, helper}=req.body;
 
   let busDetails = {
     busName,
@@ -79,8 +80,8 @@ module.exports.createBus = async (req, res) => {
         return res.status(404).json({ msg: "No such location found" });
       }
 
-      // busDetails['driver']= driver;
-      // busDetails['helper'] = helper;
+      busDetails['driver']= driver;
+      busDetails['helper'] = helper;
       busDetails.from = fromLocation._id;
       busDetails.to = toLocation._id;
       console.log("jklmno")
@@ -110,6 +111,66 @@ module.exports.createBus = async (req, res) => {
       res.status(500).json({msg:"server error"})
   }
 };
+
+
+
+// module.exports.createBus = async (req, res) => {
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//     return res.status(400).json({ msg:"checking...."});
+//   }
+//   const {
+//     busName,
+//     vehicleNo,
+//     seats,
+//     busType,
+//     seatCategory,
+//     policy,
+//     images,
+//     from,
+//     to,
+//     fare,
+//     arrivalTime,
+//     departureTime,driver, helper
+//   } = req.body;
+ 
+
+//   let busDetails = {
+//     busName,
+//     vehicleNo,
+//     busType,
+//     seatCategory,
+//     policy,
+//     images,
+//     from,
+//     to,
+//     fare,
+//     arrivalTime,
+//     departureTime,driver, helper
+//   };
+
+
+  
+//   try {
+//     if(from === to){
+//       res.status(400).json({msg:"source and destination can't be same"})
+//     }
+//     busDetails.seats=generateseat(seats)
+
+//     let bus = new Bus(busDetails);
+
+//       console.log("done successfully");
+//       await bus.save();
+//       res.status(200).json(bus);
+//   }
+//     catch (err) {
+//       console.log(err)
+//       res.status(500).json({msg:"server error"})
+//   }
+// };
+
+
+
 
 
 module.exports.getBus=async(req, res)=>{

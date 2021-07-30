@@ -29,7 +29,7 @@ const bookTickets = async (req, res) => {
       }
 
       let seats=bus.seats;
-      // console.log(seats,"seats")
+      console.log(seats,"seats")
       const allBookedSeat =await allBookedTickets(req.params.busId) 
       console.log(allBookedSeat,"allbooked")
 
@@ -53,10 +53,11 @@ const bookTickets = async (req, res) => {
       createTicket.busId = bus._id;
   
       const generateTicket = new Tickets(createTicket);
+      console.log(generateTicket)
      
       await generateTicket.save();
 
-      return res.status(200).json(generateTicket);
+      return res.status(200).json([generateTicket]);
   
   } catch (err) {
     console.log(err)

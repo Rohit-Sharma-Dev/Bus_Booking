@@ -117,9 +117,6 @@ router.post('/addbus',[auth, [
     .isEmpty(),
     check('arrivalTime', 'arrivalTime of the bus is required')
     .not()
-    .isEmpty(),
-    check('departureTime', 'departureTime of the bus is required')
-    .not()
     .isEmpty()
 ]],createBus)
 
