@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const cors=require('cors')
 const app = express();
 var bodyParser = require('body-parser');
 const morgan= require('morgan')
@@ -8,7 +9,12 @@ const PORT=6000
 // connectDB();
 
 app.use(express.json({ extended: false }));
+
+app.use(cors());
+
+
 app.use(morgan('dev'))
+
 app.get('/',(req,res)=>{
     res.send("hello user....")
 })
